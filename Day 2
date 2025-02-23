@@ -1,0 +1,29 @@
+/*For two strings s and t, we say "t divides s" if and only if s = t + t + t + ... + t + t (i.e., t is concatenated with itself one or more times).
+Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.*/
+
+class Solution {
+    public static String gcdOfStrings(String str1, String str2) {
+        // Step 1: Check if str1 and str2 follow the same pattern
+        if (!(str1 + str2).equals(str2 + str1)) {
+            return ""; // Agar different patterns hain to answer nahi milega
+        }
+
+        // Step 2: Find GCD of lengths
+        int gcdLength = gcd(str1.length(), str2.length());
+
+        // Step 3: Extract substring of GCD length
+        return str1.substring(0, gcdLength);
+    }
+
+    // Euclidean Algorithm for GCD
+    private static int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    // Test Cases
+    public static void main(String[] args) {
+        System.out.println(gcdOfStrings("ababab", "abab"));  // Output: "ab"
+        System.out.println(gcdOfStrings("ABCABC", "ABC"));   // Output: "ABC"
+        System.out.println(gcdOfStrings("LEET", "CODE"));    // Output: ""
+    }
+}
